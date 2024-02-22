@@ -1,0 +1,128 @@
+definitions:
+  model.CreateCategory:
+    properties:
+      name:
+        type: string
+    type: object
+  response.ResponseModel:
+    properties:
+      code:
+        type: integer
+      description:
+        type: string
+      error:
+        type: string
+      snapData: {}
+      status:
+        type: string
+    type: object
+host: localhost:9000
+info:
+  contact: {}
+  description: API Server for Book-Store Application
+  title: Book-Store System
+  version: "1.0"
+paths:
+  /api/v1/categories:
+    get:
+      consumes:
+      - application/json
+      description: Get Category List
+      parameters:
+      - description: searchKey
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      summary: Get Category List
+      tags:
+      - Category
+    post:
+      consumes:
+      - application/json
+      description: Create Category
+      parameters:
+      - description: Create Category
+        in: body
+        name: create
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateCategory'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      summary: Create Category
+      tags:
+      - Category
+  /api/v1/categories/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get Category
+      parameters:
+      - description: id
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.ResponseModel'
+      summary: Get Category
+      tags:
+      - Category
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
